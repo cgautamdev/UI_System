@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1753e44447da984ca5306beafcb2a82, type: 3}
+  m_Name: Armor_01
+  m_EditorClassIdentifier: Assembly-CSharp::ArmorDataSO
+  itemName: Tactical Rig
+  itemSprite: {fileID: 579541046, guid: 7227fda5a3df83a49985e70c4d4cfefc, type: 3}
+  itemType: 3
