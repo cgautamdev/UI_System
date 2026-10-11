@@ -12,14 +12,6 @@ public class InventoryTabGroup : MonoBehaviour
 
     public InventoryTabButton selectedTab;
 
-    public void OnSubscribe(InventoryTabButton button)
-    {
-        if(button == null) {
-            tabButtons = new List<InventoryTabButton>();
-        }
-        tabButtons.Add(button);
-    }
-
     public void OnTabEnter(InventoryTabButton button)
     {
         ResetTabs();
@@ -36,31 +28,36 @@ public class InventoryTabGroup : MonoBehaviour
     public void OnTabSelected(InventoryTabButton button)
     {
         selectedTab = button;
+
         ResetTabs();
         button.backgroundImage.color = _tabActiveColor;
 
-        int index = tabButtons.IndexOf(button);
-        for(int i = 0; i < panels.Count; i++) {
-            if(i == index) {
-                panels[i].SetActive(true);
-            }
-            else {
-                panels[i].SetActive(false);
+        foreach(GameObject panel in panels) {
+            if(!panel.TryGetComponent<InventoryCategoryPanel>(out var panelCategory))
+                continue;
+
+            panel.SetActive(panelCategory.category == button.type);
+        }
+    }
+
+    public void OnTabSelectedFromCard(InventoryItemType category)
+    {
+        foreach(InventoryTabButton button in tabButtons) {
+            bool isTarget = button.type == category;
+            button.gameObject.SetActive(isTarget);
+            if(isTarget) {
+                OnTabSelected(button);
             }
         }
     }
 
-    // for main card to call
-    public void OpenCategory(InventoryItemType category)
+    public void OpenFullInventoryTabs()
     {
-        for(int i = 0;i < tabButtons.Count; i++) {
-            InventoryTabButton tab = tabButtons[i];
-            bool isTargetTab = tab.type == category;
-
-            tab.gameObject.SetActive(isTargetTab);
-            if(isTargetTab) {
-                OnTabEnter(tab);
-            }
+        foreach (InventoryTabButton button in tabButtons) {
+            button.gameObject.SetActive(true);
+        }
+        if(tabButtons.Count > 0){
+            OnTabSelected(tabButtons[0]);
         }
     }
 

@@ -113,12 +113,12 @@ TextureImporter:
       name: AR_01
       rect:
         serializedVersion: 2
-        x: 12
-        y: 520
+        x: 690
+        y: 514
         width: 836
         height: 377
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -135,12 +135,12 @@ TextureImporter:
       name: AR_02
       rect:
         serializedVersion: 2
-        x: 864
+        x: 7
         y: 525
         width: 668
         height: 358
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -157,12 +157,12 @@ TextureImporter:
       name: AR_03
       rect:
         serializedVersion: 2
-        x: 7
-        y: 109
+        x: 693
+        y: 113
         width: 836
         height: 319
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -179,12 +179,12 @@ TextureImporter:
       name: AR_04
       rect:
         serializedVersion: 2
-        x: 853
+        x: 8
         y: 110
         width: 676
         height: 327
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

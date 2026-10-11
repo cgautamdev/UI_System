@@ -113,12 +113,12 @@ TextureImporter:
       name: Pistol_01
       rect:
         serializedVersion: 2
-        x: 37
+        x: 766
         y: 485
         width: 733
         height: 508
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -135,12 +135,12 @@ TextureImporter:
       name: Pistol_02
       rect:
         serializedVersion: 2
-        x: 770
-        y: 490
+        x: 20
+        y: 486
         width: 751
         height: 509
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -157,12 +157,12 @@ TextureImporter:
       name: Pistol_03
       rect:
         serializedVersion: 2
-        x: 13
-        y: 34
+        x: 725
+        y: 30
         width: 796
         height: 451
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -179,12 +179,12 @@ TextureImporter:
       name: Pistol_04
       rect:
         serializedVersion: 2
-        x: 824
-        y: 18
+        x: 32
+        y: 16
         width: 677
         height: 468
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

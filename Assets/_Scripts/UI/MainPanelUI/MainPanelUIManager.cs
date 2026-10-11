@@ -1,14 +1,40 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MainPanelUIManager : MonoBehaviour
 {
+    public static MainPanelUIManager Instance;
+
+    public UIManager uiManager;
     public InventoryTabGroup tabGroup;
 
     public List<MainCard> cards;
 
-    public void OpenInventoryCategory(InventoryItemType type)
+    private void Awake()
     {
-        tabGroup.OpenCategory(type);
+        Instance = this;
+    }
+
+    public void OpenInventoryWithCategory(InventoryItemType cardType)
+    {
+        uiManager.mainPanel.SetActive(false);
+        uiManager.inventoryPanel.SetActive(true);
+
+        uiManager.inventoryUIManager.ResetPrimaryWeaponFilter();
+
+        tabGroup.OnTabSelectedFromCard(cardType);
+    }
+
+    public void UpdateMenuCard(InventoryItemSO item)
+    {
+        foreach (MainCard card in cards) {
+            if(card.cardType != item.itemType) {
+                continue;
+            }
+
+            card.SetMenuCard(item);
+            return;
+        }
     }
 }

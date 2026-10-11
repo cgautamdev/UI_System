@@ -8,6 +8,7 @@ public class BuyCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public TextMeshProUGUI itemName;
     public Image itemImage;
+    public InventoryItemSO itemData;
 
     public UnityEvent OnCardEnter;
     public UnityEvent OnCardExit;
@@ -19,15 +20,35 @@ public class BuyCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         customizeButton.onClick.AddListener(OnCustomizeWeaponButtonPressed);
         equipButton.onClick.AddListener(OnEquipWeaponButtonPressed);
+
+        if(itemData.itemType == InventoryItemType.Throwable || itemData.itemType == InventoryItemType.Armor) {
+            customizeButton.gameObject.SetActive(false);
+        }
     }
 
     public void OnEquipWeaponButtonPressed()
     {
-        OnEquipWeapon();
+        InventoryManager.Instance.CheckWeaponEquipStateAndEquip(itemData);
+        RefreshEquipButtonText();
     }
+
+
+    public void RefreshEquipButtonText()
+    {
+        bool isEquipped = InventoryManager.Instance.equippedItems.Contains(itemData);
+
+        TextMeshProUGUI buttonText = equipButton.GetComponentInChildren<TextMeshProUGUI>();
+
+        if(buttonText != null) {
+            buttonText.text = isEquipped ? "Equipped" : "Equip";
+        }
+    }
+
     public void OnCustomizeWeaponButtonPressed()
     {
-        OnCustomizeWeapon();
+        InventoryUIManager manager = GetComponentInParent<InventoryUIManager>();
+        if(manager != null)
+            manager.OnCustomizeWeaponClick(itemData);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -38,16 +59,5 @@ public class BuyCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerExit(PointerEventData eventData)
     {
         OnCardExit?.Invoke();
-    }
-
-    // functions
-    public void OnEquipWeapon()
-    {
-        Debug.Log("Equip: " +  itemName.text);
-    }
-
-    public void OnCustomizeWeapon()
-    {
-        Debug.Log("Customize: " + itemName.text);
     }
 }

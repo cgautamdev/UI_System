@@ -113,12 +113,12 @@ TextureImporter:
       name: SMG_01
       rect:
         serializedVersion: 2
-        x: 13
-        y: 541
+        x: 745
+        y: 536
         width: 779
         height: 422
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -135,12 +135,12 @@ TextureImporter:
       name: SMG_02
       rect:
         serializedVersion: 2
-        x: 801
-        y: 528
+        x: 5
+        y: 527
         width: 735
         height: 436
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -157,12 +157,12 @@ TextureImporter:
       name: SMG_03
       rect:
         serializedVersion: 2
-        x: 17
-        y: 43
+        x: 755
+        y: 47
         width: 767
         height: 459
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -179,12 +179,12 @@ TextureImporter:
       name: SMG_04
       rect:
         serializedVersion: 2
-        x: 795
-        y: 39
+        x: 7
+        y: 38
         width: 736
         height: 468
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

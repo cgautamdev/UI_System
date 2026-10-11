@@ -22,9 +22,4 @@ public class InventoryTabButton : MonoBehaviour, IPointerEnterHandler, IPointerE
     {
         tabGroup.OnTabExit(this);
     }
-
-    private void Start()
-    {
-        tabGroup.OnSubscribe(this);
-    }
 }
