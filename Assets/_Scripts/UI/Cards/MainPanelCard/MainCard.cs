@@ -1,73 +1,125 @@
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MainCard : MonoBehaviour
 {
-    public InventoryItemType cardType;
-    public MainPanelUIManager mainPanelUIManager;
-    public TextMeshProUGUI itemName;
-    public TextMeshProUGUI cardCategoryText;
-    public Image itemImage;
-    public GameObject emptyItem;
+    [Header("Card Configuration")]
+    [SerializeField] private InventoryItemType cardType;
+    [SerializeField] private MainPanelUIManager mainPanelUIManager;
 
-    public Sprite transparentIcon;
-    public Image muzzleAttachmentIcon;
-    public Image barrelAttachmentIcon;
-    public Image opticAttachmentIcon;
-    public Image stockAttachmentIcon;
-    public Image magAttachmentIcon;
+    [Header("Item Display")]
+    [SerializeField] private TextMeshProUGUI itemName;
+    [SerializeField] private TextMeshProUGUI cardCategoryText;
+    [SerializeField] private Image itemImage;
+    [SerializeField] private GameObject emptyItem;
+
+    [Header("Attachment Icon Settings")]
+    [SerializeField] private Sprite transparentIcon;
+
+    [Header("Attachment Icons")]
+    [SerializeField] private Image muzzleAttachmentIcon;
+    [SerializeField] private Image barrelAttachmentIcon;
+    [SerializeField] private Image opticAttachmentIcon;
+    [SerializeField] private Image stockAttachmentIcon;
+    [SerializeField] private Image magAttachmentIcon;
+
+    public InventoryItemType CardType => cardType;
 
     public void OpenInventoryCategory()
     {
-        InventoryManager.Instance.primaryInventoryWeapons.Clear();
-        InventoryManager.Instance.secondaryInventoryWeapons.Clear();
+        if(mainPanelUIManager == null) {
+            Debug.LogError(
+                "Cannot open inventory category: MainPanelUIManager is missing.",
+                this);
+            return;
+        }
 
         mainPanelUIManager.OpenInventoryWithCategory(cardType);
     }
 
     public void SetMenuCard(InventoryItemSO item)
     {
-        emptyItem.SetActive(false);
-        itemName.text = item.itemName;
-        itemImage.sprite = item.itemSprite;
+        if(item == null) {
+            Debug.LogWarning(
+                "Cannot set main card: inventory item is null.",
+                this);
+            return;
+        }
+
+        if(emptyItem != null)
+            emptyItem.SetActive(false);
+
+        if(itemName != null)
+            itemName.text = item.itemName;
+
+        if(itemImage != null)
+            itemImage.sprite = item.itemSprite;
+
+        if(cardCategoryText != null)
+            cardCategoryText.text = item.itemType.ToString();
     }
 
     public void UpdateAttachmentIcons(
         List<WeaponAttachmentDataSO> attachments)
     {
-        // Reset all icons to their default sprites.
-        muzzleAttachmentIcon.sprite = transparentIcon;
-        barrelAttachmentIcon.sprite = transparentIcon;
-        opticAttachmentIcon.sprite = transparentIcon;
-        stockAttachmentIcon.sprite = transparentIcon;
-        magAttachmentIcon.sprite = transparentIcon;
+        ResetAttachmentIcons();
+
+        if(attachments == null)
+            return;
 
         foreach(WeaponAttachmentDataSO attachment in attachments) {
-            switch(attachment.attachmentType) {
-                case AttachmentType.Muzzle:
-                    muzzleAttachmentIcon.sprite = attachment.attachmentIcon;
-                    break;
+            if(attachment == null)
+                continue;
 
-                case AttachmentType.Barrel:
-                    barrelAttachmentIcon.sprite = attachment.attachmentIcon;
-                    break;
+            Image targetIcon = GetAttachmentIcon(
+                attachment.attachmentType);
 
-                case AttachmentType.Optic:
-                    opticAttachmentIcon.sprite = attachment.attachmentIcon;
-                    break;
+            if(targetIcon == null)
+                continue;
 
-                case AttachmentType.Stock:
-                    stockAttachmentIcon.sprite = attachment.attachmentIcon;
-                    break;
-
-                case AttachmentType.Magazine:
-                    magAttachmentIcon.sprite = attachment.attachmentIcon;
-                    break;
-            }
+            targetIcon.sprite = attachment.attachmentIcon != null
+                ? attachment.attachmentIcon
+                : transparentIcon;
         }
     }
 
+    public void ResetAttachmentIcons()
+    {
+        ResetAttachmentIcon(muzzleAttachmentIcon);
+        ResetAttachmentIcon(barrelAttachmentIcon);
+        ResetAttachmentIcon(opticAttachmentIcon);
+        ResetAttachmentIcon(stockAttachmentIcon);
+        ResetAttachmentIcon(magAttachmentIcon);
+    }
+
+    private void ResetAttachmentIcon(Image icon)
+    {
+        if(icon != null)
+            icon.sprite = transparentIcon;
+    }
+
+    private Image GetAttachmentIcon(AttachmentType attachmentType)
+    {
+        switch(attachmentType) {
+            case AttachmentType.Muzzle:
+                return muzzleAttachmentIcon;
+
+            case AttachmentType.Barrel:
+                return barrelAttachmentIcon;
+
+            case AttachmentType.Optic:
+                return opticAttachmentIcon;
+
+            case AttachmentType.Stock:
+                return stockAttachmentIcon;
+
+            case AttachmentType.Magazine:
+                return magAttachmentIcon;
+
+            default:
+                return null;
+        }
+    }
 }

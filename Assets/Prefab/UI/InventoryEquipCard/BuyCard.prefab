@@ -1214,7 +1214,7 @@ MonoBehaviour:
   itemName: {fileID: 7829650824315776491}
   itemImage: {fileID: 3693062388897646160}
   itemData: {fileID: 0}
-  OnCardEnter:
+  onCardEnter:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2504635659828872867}
@@ -1229,7 +1229,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  OnCardExit:
+  onCardExit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2504635659828872867}

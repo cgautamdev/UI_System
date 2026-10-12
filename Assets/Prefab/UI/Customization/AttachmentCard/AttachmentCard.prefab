@@ -150,6 +150,7 @@ MonoBehaviour:
   attachmentType: 0
   attachmentName: {fileID: 4392329518794750880}
   attachmentIcon: {fileID: 6273207348427788655}
+  tempSprite: {fileID: 21300000, guid: cc9e95ea9d9d56c47a985c44e27da405, type: 3}
   PointerEnter:
     m_PersistentCalls:
       m_Calls:

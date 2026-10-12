@@ -2,5 +2,7 @@ using UnityEngine;
 
 public class InventoryCategoryPanel : MonoBehaviour
 {
-    public InventoryItemType category;
+    [SerializeField] private InventoryItemType category;
+
+    public InventoryItemType Category => category;
 }

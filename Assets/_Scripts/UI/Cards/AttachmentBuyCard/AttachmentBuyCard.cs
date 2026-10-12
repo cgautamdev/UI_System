@@ -1,34 +1,63 @@
+
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class AttachmentBuyCard : MonoBehaviour
 {
-    public Image attachmentImage;
-    public TextMeshProUGUI attachmentName;
-    public Button attachmentEquipButton;
-    public WeaponAttachmentDataSO attachment;
-    public TextMeshProUGUI equipText;
+    [Header("Attachment Display")]
+    [SerializeField] private Image attachmentImage;
+    [SerializeField] private TextMeshProUGUI attachmentName;
+
+    [Header("Equip Button")]
+    [SerializeField] private Button attachmentEquipButton;
+    [SerializeField] private TextMeshProUGUI equipText;
+
+    [Header("Attachment Data")]
+    [SerializeField] private WeaponAttachmentDataSO attachment;
 
     public void OnAttachmentEquip()
     {
-        CustomizationPanelUIManager manager = GetComponentInParent<CustomizationPanelUIManager>();
+        CustomizationPanelUIManager manager =
+            GetComponentInParent<CustomizationPanelUIManager>();
+
+        if(manager == null || attachment == null) {
+            Debug.LogWarning(
+                "Cannot toggle attachment: manager or attachment is missing.",
+                this);
+            return;
+        }
+
         manager.OnAttachmentEquipOnWeapon(attachment);
-
-
     }
 
     public void UpdateEquipText(bool isEquipped)
     {
-        equipText.text = isEquipped ? "Equipped" : "Equip";
-        attachmentEquipButton.interactable = !isEquipped;
+        if(equipText != null)
+            equipText.text = isEquipped ? "Unequip" : "Equip";
+
+        if(attachmentEquipButton != null)
+            attachmentEquipButton.interactable = true;
     }
 
-    public void SetAttachmentBuyCard(WeaponAttachmentDataSO attachmentDataSO)
+    public void SetAttachmentBuyCard(
+        WeaponAttachmentDataSO attachmentDataSO)
     {
-        attachmentImage.sprite = attachmentDataSO.attachmentIcon;
-        attachmentName.text = attachmentDataSO.attachmentName;
+        if(attachmentDataSO == null) {
+            Debug.LogWarning(
+                "Cannot initialize AttachmentBuyCard: attachment data is missing.",
+                this);
+            return;
+        }
+
         attachment = attachmentDataSO;
+
+        if(attachmentImage != null)
+            attachmentImage.sprite = attachmentDataSO.attachmentIcon;
+
+        if(attachmentName != null)
+            attachmentName.text = attachmentDataSO.attachmentName;
     }
 
+    public WeaponAttachmentDataSO Attachment => attachment;
 }

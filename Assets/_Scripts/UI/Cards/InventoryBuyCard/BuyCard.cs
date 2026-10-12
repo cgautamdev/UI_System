@@ -1,5 +1,4 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -7,69 +6,153 @@ using UnityEngine.UI;
 
 public class BuyCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public TextMeshProUGUI itemName;
-    public Image itemImage;
-    public InventoryItemSO itemData;
+    [Header("Item Display")]
+    [SerializeField] private TextMeshProUGUI itemName;
+    [SerializeField] private Image itemImage;
+    [SerializeField] private InventoryItemSO itemData;
 
-    public UnityEvent OnCardEnter;
-    public UnityEvent OnCardExit;
+    [Header("Card Events")]
+    [SerializeField] private UnityEvent onCardEnter;
+    [SerializeField] private UnityEvent onCardExit;
 
-    public Button customizeButton;
-    public Button equipButton;
+    [Header("Action Buttons")]
+    [SerializeField] private Button customizeButton;
+    [SerializeField] private Button equipButton;
+
+    public InventoryItemSO ItemData => itemData;
 
     private void Start()
     {
-        customizeButton.onClick.AddListener(OnCustomizeWeaponButtonPressed);
-        equipButton.onClick.AddListener(OnEquipWeaponButtonPressed);
-
-        // hide customize button for these
-        if(itemData.itemType == InventoryItemType.Throwable || itemData.itemType == InventoryItemType.Armor) {
-            customizeButton.gameObject.SetActive(false);
+        if(itemData == null) {
+            Debug.LogWarning("BuyCard has no itemData assigned.", this);
+            return;
         }
 
-        // hide customize button for launchers and melee as well
-        WeaponDataSO weaponData = itemData as WeaponDataSO;
-        if(weaponData != null && (weaponData.weaponClass == WeaponClass.Launchers || weaponData.weaponClass == WeaponClass.Melee)){
-                customizeButton.gameObject.SetActive(false);
+        ConfigureCustomizeButton();
+        RefreshEquipButtonText();
+    }
+
+    public void Initialize(InventoryItemSO item)
+    {
+        if(item == null) {
+            Debug.LogWarning(
+                "Cannot initialize BuyCard with a null item.", this);
+            return;
         }
+
+        itemData = item;
+
+        if(itemName != null)
+            itemName.text = item.itemName;
+
+        if(itemImage != null)
+            itemImage.sprite = item.itemSprite;
+
+        ConfigureCustomizeButton();
+        RefreshEquipButtonText();
+    }
+
+    private void ConfigureCustomizeButton()
+    {
+        if(customizeButton == null || itemData == null)
+            return;
+
+        bool canCustomize =
+            itemData.itemType != InventoryItemType.Throwable &&
+            itemData.itemType != InventoryItemType.Armor;
+
+        if(itemData is WeaponDataSO weaponData &&
+            (weaponData.weaponClass == WeaponClass.Launchers ||
+             weaponData.weaponClass == WeaponClass.Melee)) {
+            canCustomize = false;
+        }
+
+        customizeButton.gameObject.SetActive(canCustomize);
     }
 
     public void OnEquipWeaponButtonPressed()
     {
-        InventoryManager.Instance.CheckWeaponEquipStateAndEquip(itemData);
+        InventoryManager inventory = InventoryManager.Instance;
+
+        if(itemData == null) {
+            Debug.LogWarning("Cannot equip an item because itemData is null.", this);
+            return;
+        }
+
+        if(inventory == null) {
+            Debug.LogError("InventoryManager.Instance is missing.", this);
+            return;
+        }
+
+        if(inventory.EquippedItems == null) {
+            Debug.LogWarning(
+                "Equipped items list is not initialized.", this);
+            return;
+        }
+
+        if(!inventory.EquippedItems.Contains(itemData)) {
+            inventory.CheckWeaponEquipStateAndEquip(itemData);
+        }
+
         RefreshEquipButtonText();
-        InventoryUIManager manager = GetComponentInParent<InventoryUIManager>();
+
+        InventoryUIManager manager =
+            GetComponentInParent<InventoryUIManager>();
+
         if(manager != null) {
+            manager.RefreshEquipButtonStates();
             manager.OnEquipItemClick();
         }
     }
 
-
     public void RefreshEquipButtonText()
     {
-        bool isEquipped = InventoryManager.Instance.equippedItems.Contains(itemData);
+        if(itemData == null || equipButton == null)
+            return;
 
-        TextMeshProUGUI buttonText = equipButton.GetComponentInChildren<TextMeshProUGUI>();
+        InventoryManager inventory = InventoryManager.Instance;
 
-        if(buttonText != null) {
+        if(inventory == null || inventory.EquippedItems == null)
+            return;
+
+        bool isEquipped = inventory.EquippedItems.Contains(itemData);
+
+        TextMeshProUGUI buttonText =
+            equipButton.GetComponentInChildren<TextMeshProUGUI>(true);
+
+        if(buttonText != null)
             buttonText.text = isEquipped ? "Equipped" : "Equip";
-        }
+
+        // Keep the button enabled; equipping an already-equipped item
+        // simply refreshes the state and returns to the main panel.
+        equipButton.interactable = true;
     }
 
     public void OnCustomizeWeaponButtonPressed()
     {
-        InventoryUIManager manager = GetComponentInParent<InventoryUIManager>();
-        if(manager != null)
+        if(itemData == null)
+            return;
+
+        InventoryUIManager manager =
+            GetComponentInParent<InventoryUIManager>();
+
+        if(manager != null) {
             manager.OnCustomizeWeaponClick(itemData);
+        }
+        else {
+            Debug.LogWarning(
+                "InventoryUIManager could not be found in the parent hierarchy.",
+                this);
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        OnCardEnter?.Invoke();
+        onCardEnter?.Invoke();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        OnCardExit?.Invoke();
+        onCardExit?.Invoke();
     }
 }

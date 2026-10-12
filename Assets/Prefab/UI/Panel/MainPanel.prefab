@@ -241,9 +241,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+        m_TargetAssemblyTypeName: InventoryUIManager, Assembly-CSharp
+        m_MethodName: OpenFullInventory
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -251,18 +251,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 3527793325536676438}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &7019671421035146926
 GameObject:
@@ -322,7 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4117647, g: 0.44705883, b: 0.48235294, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -473,15 +461,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Inventory
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 283708ca59777054393b35c7f7e80b94, type: 2}
+  m_sharedMaterial: {fileID: 1046461974880185770, guid: 283708ca59777054393b35c7f7e80b94, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4287285990
+  m_fontColor: {r: 0.9019608, g: 0.7921569, b: 0.5411765, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -498,13 +486,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
+  m_fontSize: 23
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 30
-  m_fontStyle: 1
+  m_fontSizeMax: 23
+  m_fontStyle: 16
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -587,6 +575,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2254625709972680820, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.8712463
+      objectReference: {fileID: 0}
     - target: {fileID: 2668048787714654764, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -691,14 +683,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5158715383741769003, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.12515259
+      objectReference: {fileID: 0}
     - target: {fileID: 5468103195239699214, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_fontSize
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605370219952893686, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.6414032
       objectReference: {fileID: 0}
     - target: {fileID: 6512508025432846399, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_PreferredHeight
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 8842831849313869161, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: mainPanelUIManager
+      value: 
+      objectReference: {fileID: 1976393759106078832}
     - target: {fileID: 8904851114701243771, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.9718893
@@ -725,11 +729,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8904851114701243771, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -0.28121948
       objectReference: {fileID: 0}
     - target: {fileID: 8904851114701243771, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -5.9804688
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -741,6 +745,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2668048787714654764, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
   m_PrefabInstance: {fileID: 2125675943541984331}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7478200471127380258 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8842831849313869161, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+  m_PrefabInstance: {fileID: 2125675943541984331}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c568b6614217140bda28e0f5a586ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainCard
 --- !u!1001 &2363241320663507123
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -785,6 +800,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2254625709972680820, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.8712463
+      objectReference: {fileID: 0}
     - target: {fileID: 2668048787714654764, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -889,6 +908,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5158715383741769003, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.12515259
+      objectReference: {fileID: 0}
     - target: {fileID: 5468103195239699214, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_text
       value: Armor
@@ -897,6 +920,18 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 5605370219952893686, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.6414032
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842831849313869161, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: cardType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842831849313869161, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: mainPanelUIManager
+      value: 
+      objectReference: {fileID: 1976393759106078832}
     - target: {fileID: 8904851114701243771, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
@@ -915,6 +950,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2668048787714654764, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
   m_PrefabInstance: {fileID: 2363241320663507123}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6517807910413762010 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8842831849313869161, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+  m_PrefabInstance: {fileID: 2363241320663507123}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c568b6614217140bda28e0f5a586ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainCard
 --- !u!1001 &2728669176830767069
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -959,6 +1005,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2254625709972680820, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.8712463
+      objectReference: {fileID: 0}
     - target: {fileID: 2668048787714654764, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1063,6 +1113,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5158715383741769003, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.12515259
+      objectReference: {fileID: 0}
     - target: {fileID: 5468103195239699214, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_text
       value: Secondary
@@ -1071,6 +1125,18 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 5605370219952893686, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.6414032
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842831849313869161, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: cardType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842831849313869161, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: mainPanelUIManager
+      value: 
+      objectReference: {fileID: 1976393759106078832}
     - target: {fileID: 8904851114701243771, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
@@ -1089,6 +1155,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2668048787714654764, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
   m_PrefabInstance: {fileID: 2728669176830767069}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6874219951554769588 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8842831849313869161, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+  m_PrefabInstance: {fileID: 2728669176830767069}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c568b6614217140bda28e0f5a586ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainCard
 --- !u!1001 &4577652801813103212
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1133,6 +1210,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2254625709972680820, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.8712463
+      objectReference: {fileID: 0}
     - target: {fileID: 2668048787714654764, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1237,6 +1318,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5158715383741769003, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.12515259
+      objectReference: {fileID: 0}
     - target: {fileID: 5468103195239699214, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_text
       value: Throwable
@@ -1245,6 +1330,18 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 5605370219952893686, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.6414032
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842831849313869161, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: cardType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842831849313869161, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: mainPanelUIManager
+      value: 
+      objectReference: {fileID: 1976393759106078832}
     - target: {fileID: 8904851114701243771, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
@@ -1263,6 +1360,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2668048787714654764, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
   m_PrefabInstance: {fileID: 4577652801813103212}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4989735840767368965 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8842831849313869161, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+  m_PrefabInstance: {fileID: 4577652801813103212}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c568b6614217140bda28e0f5a586ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainCard
 --- !u!1001 &9151307720248819951
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1364,7 +1472,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6604500804652356456, guid: 8673e06b254dc6141918136d2de8f364, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5565352202201015870}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5623523363946433209, guid: 8673e06b254dc6141918136d2de8f364, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1976393759106078832}
   m_SourcePrefab: {fileID: 100100000, guid: 8673e06b254dc6141918136d2de8f364, type: 3}
 --- !u!224 &1773326956064037637 stripped
 RectTransform:
@@ -1381,3 +1492,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5623523363946433209, guid: 8673e06b254dc6141918136d2de8f364, type: 3}
   m_PrefabInstance: {fileID: 9151307720248819951}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1976393759106078832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3527793325536676438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cef6897ea8358824099a12a3033ac373, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainPanelUIManager
+  uiManager: {fileID: 0}
+  tabGroup: {fileID: 0}
+  cards:
+  - {fileID: 7478200471127380258}
+  - {fileID: 6874219951554769588}
+  - {fileID: 4989735840767368965}
+  - {fileID: 6517807910413762010}
