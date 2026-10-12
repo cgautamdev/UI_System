@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponAttachmentDataSO
   attachmentType: 3
   attachmentName: Extended Box Mag
-  attachmentIcon: {fileID: 0}
+  attachmentIcon: {fileID: -365462798, guid: e4d8dbc74e320fc4299f4752dc83ea52, type: 3}
   compatibleWeapons: 02000000

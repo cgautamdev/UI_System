@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -21,8 +22,15 @@ public class BuyCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         customizeButton.onClick.AddListener(OnCustomizeWeaponButtonPressed);
         equipButton.onClick.AddListener(OnEquipWeaponButtonPressed);
 
+        // hide customize button for these
         if(itemData.itemType == InventoryItemType.Throwable || itemData.itemType == InventoryItemType.Armor) {
             customizeButton.gameObject.SetActive(false);
+        }
+
+        // hide customize button for launchers and melee as well
+        WeaponDataSO weaponData = itemData as WeaponDataSO;
+        if(weaponData != null && (weaponData.weaponClass == WeaponClass.Launchers || weaponData.weaponClass == WeaponClass.Melee)){
+                customizeButton.gameObject.SetActive(false);
         }
     }
 
@@ -30,6 +38,10 @@ public class BuyCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         InventoryManager.Instance.CheckWeaponEquipStateAndEquip(itemData);
         RefreshEquipButtonText();
+        InventoryUIManager manager = GetComponentInParent<InventoryUIManager>();
+        if(manager != null) {
+            manager.OnEquipItemClick();
+        }
     }
 
 

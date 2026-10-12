@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponAttachmentDataSO
   attachmentType: 2
   attachmentName: 2x Holographic Sight
+  attachmentIcon: {fileID: -988532214, guid: 90f6cba043d96424ba845c917fd6cf94, type: 3}
   compatibleWeapons: 0000000001000000

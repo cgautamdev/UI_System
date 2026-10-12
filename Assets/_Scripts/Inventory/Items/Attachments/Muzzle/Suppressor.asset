@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponAttachmentDataSO
   attachmentType: 0
   attachmentName: Suppressor
-  attachmentIcon: {fileID: 0}
+  attachmentIcon: {fileID: -1922213599, guid: 7d6ca319cbd91b14f9b930a0b3c5647b, type: 3}
   compatibleWeapons: 00000000010000000200000003000000

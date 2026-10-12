@@ -37,4 +37,24 @@ public class MainPanelUIManager : MonoBehaviour
             return;
         }
     }
+
+    public void UpdateMenuCardIcons(InventoryItemSO item)
+    {
+        List<WeaponAttachmentDataSO> attachments = item.itemType switch {
+            InventoryItemType.PrimaryWeapon => InventoryManager.Instance.primaryWeaponAttachments,
+            InventoryItemType.SecondaryWeapon => InventoryManager.Instance.secondaryWeaponAttachments,
+            _ => null
+        };
+
+        if(attachments == null)
+            return;
+
+        foreach(MainCard card in cards) {
+            if(card.cardType != item.itemType)
+                continue;
+
+            card.UpdateAttachmentIcons(attachments);
+            return;
+        }
+    }
 }

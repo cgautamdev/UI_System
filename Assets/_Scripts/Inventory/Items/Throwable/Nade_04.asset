@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8c2b362bc6baaf4ea833784c464de60, type: 3}
   m_Name: Nade_04
   m_EditorClassIdentifier: Assembly-CSharp::ThrowableDataSO
-  itemName: Molotov
-  itemSprite: {fileID: -1227636379, guid: 27a5867750b2da446b9ead2be9a5b410, type: 3}
+  itemName: Flash Grenade
+  itemSprite: {fileID: -1286454991, guid: 27a5867750b2da446b9ead2be9a5b410, type: 3}
   itemType: 2
+  throwableType: 1

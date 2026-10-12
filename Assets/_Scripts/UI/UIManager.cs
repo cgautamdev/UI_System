@@ -10,9 +10,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        mainPanel.SetActive(true);
-        inventoryPanel.SetActive(false);
-        customizationPanel.SetActive(false);
+        OpenMainCards();
         inventoryUIManager = inventoryPanel.GetComponent<InventoryUIManager>();
     }
 
@@ -23,5 +21,12 @@ public class UIManager : MonoBehaviour
         customizationPanel.SetActive(true);
 
         customizationPanel.GetComponent<CustomizationPanelUIManager>().OnCustomizeWeapon(itemData);
+    }
+
+    public void OpenMainCards()
+    {
+        mainPanel.SetActive(true);
+        inventoryPanel.SetActive(false);
+        customizationPanel.SetActive(false);
     }
 }

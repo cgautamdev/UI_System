@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponAttachmentDataSO
   attachmentType: 2
   attachmentName: 8x Precision Scope
-  attachmentIcon: {fileID: 0}
+  attachmentIcon: {fileID: 1320842609, guid: 90f6cba043d96424ba845c917fd6cf94, type: 3}
   compatibleWeapons: 02000000

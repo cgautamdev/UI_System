@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: Desert Eagle
   itemSprite: {fileID: 1074577691, guid: 2231386a42ce83242941a61dd24b0b56, type: 3}
   itemType: 1
-  WeaponClass: 3
+  weaponClass: 3

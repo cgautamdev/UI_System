@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponAttachmentDataSO
   attachmentType: 0
   attachmentName: Compensator
-  attachmentIcon: {fileID: 0}
+  attachmentIcon: {fileID: 184035829, guid: 7d6ca319cbd91b14f9b930a0b3c5647b, type: 3}
   compatibleWeapons: 000000000100000003000000

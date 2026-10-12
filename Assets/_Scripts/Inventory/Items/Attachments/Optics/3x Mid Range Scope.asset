@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: 3x Mid Range Scope
   m_EditorClassIdentifier: Assembly-CSharp::WeaponAttachmentDataSO
   attachmentType: 2
-  attachmentName: 2x Mid Range Scope
+  attachmentName: 3x Mid Range Scope
+  attachmentIcon: {fileID: 1576421240, guid: 90f6cba043d96424ba845c917fd6cf94, type: 3}
   compatibleWeapons: 0000000001000000

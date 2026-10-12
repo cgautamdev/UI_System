@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponAttachmentDataSO
   attachmentType: 4
   attachmentName: Stippled Grip Tape
-  attachmentIcon: {fileID: 0}
+  attachmentIcon: {fileID: 1097827326, guid: 65b8b72294f73b148b7da5693ae5c194, type: 3}
   compatibleWeapons: 03000000

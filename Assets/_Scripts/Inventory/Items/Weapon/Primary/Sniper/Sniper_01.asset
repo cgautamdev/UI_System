@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponDataSO
   itemName: SCAR-H
   itemSprite: {fileID: -936997743, guid: c28617ba0f3755b4ab7dc4f35d8e3dc3, type: 3}
-  itemCategory: 0
-  WeaponClass: 2
+  itemType: 0
+  weaponClass: 2
+  equippedAttachments: []

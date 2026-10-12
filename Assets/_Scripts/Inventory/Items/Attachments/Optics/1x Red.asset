@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponAttachmentDataSO
   attachmentType: 2
   attachmentName: 1x Red Dot Sight
-  compatibleWeapons: 000000000100000002000000
+  attachmentIcon: {fileID: -1655996961, guid: 90f6cba043d96424ba845c917fd6cf94, type: 3}
+  compatibleWeapons: 00000000010000000200000003000000

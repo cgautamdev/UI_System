@@ -14,6 +14,12 @@ public class InventoryUIManager : MonoBehaviour
     [Header("Weapon Filter")]
     public TMP_Dropdown primaryDropdown;
 
+    [Header("Secondary Filter")]
+    public TMP_Dropdown secondaryDropdown;
+
+    [Header("Throwable Filter")]
+    public TMP_Dropdown throwableDropdown;
+
     [Header("Panels Parents")]
     public Transform primaryWeaponContent;
     public Transform secondaryWeaponContent;
@@ -25,10 +31,17 @@ public class InventoryUIManager : MonoBehaviour
         RefreshInventory();
 
         primaryDropdown.onValueChanged.AddListener(OnPrimaryDropdownChanged);
-
         OnPrimaryDropdownChanged(primaryDropdown.value);
+
+        secondaryDropdown.onValueChanged.AddListener(OnSecondaryDropdownChanged);
+        OnSecondaryDropdownChanged(secondaryDropdown.value);
+
+        throwableDropdown.onValueChanged.AddListener(OnThrowableDropdownChanged);
+        OnThrowableDropdownChanged(throwableDropdown.value);
     }
 
+    #region Filters
+    #region Primary Filter
     public void ResetPrimaryWeaponFilter()
     {
         primaryDropdown.SetValueWithoutNotify(0);
@@ -58,9 +71,80 @@ public class InventoryUIManager : MonoBehaviour
                 _ => (WeaponClass)(-1),
             };
 
-            card.gameObject.SetActive(weaponData.WeaponClass == selectedClass);
+            card.gameObject.SetActive(weaponData.weaponClass == selectedClass);
         }
     }
+    #endregion
+
+    #region Secondary Filter
+    public void ResetSecondaryWeaponFilter()
+    {
+        primaryDropdown.SetValueWithoutNotify(0);
+        OnSecondaryDropdownChanged(0);
+    }
+
+    public void OnSecondaryDropdownChanged(int index)
+    {
+        foreach(Transform child in secondaryWeaponContent) {
+            BuyCard card = child.GetComponent<BuyCard>();
+            if(card == null || card.itemData == null) { continue; }
+
+            if(index == 0) {
+                card.gameObject.SetActive(true);
+                continue;
+            }
+
+            if(card.itemData is not WeaponDataSO weaponData) {
+                card.gameObject.SetActive(false);
+                continue;
+            }
+
+            WeaponClass selectedClass = index switch {
+                1 => WeaponClass.Pistol,
+                2 => WeaponClass.Melee,
+                3 => WeaponClass.Launchers,
+                _ => (WeaponClass)(-1),
+            };
+
+            card.gameObject.SetActive(weaponData.weaponClass == selectedClass);
+        }
+    }
+    #endregion
+
+    #region Throwable Filter
+    public void ResetThrowableWeaponFilter()
+    {
+        throwableDropdown.SetValueWithoutNotify(0);
+        OnThrowableDropdownChanged(0);
+    }
+
+    public void OnThrowableDropdownChanged(int index)
+    {
+        foreach(Transform child in throwableContent) {
+            BuyCard card = child.GetComponent<BuyCard>();
+            if(card == null || card.itemData == null) { continue; }
+
+            if(index == 0) {
+                card.gameObject.SetActive(true);
+                continue;
+            }
+
+            if(card.itemData is not ThrowableDataSO throwable) {
+                card.gameObject.SetActive(false);
+                continue;
+            }
+
+            ThrowableType selectedClass = index switch {
+                1 => ThrowableType.lethal,
+                2 => ThrowableType.tactical,
+                _ => (ThrowableType)(-1),
+            };
+
+            card.gameObject.SetActive(throwable.throwableType == selectedClass);
+        }
+    }
+    #endregion
+    #endregion
 
     public void RefreshInventory()
     {
@@ -117,5 +201,11 @@ public class InventoryUIManager : MonoBehaviour
     public void OnCustomizeWeaponClick(InventoryItemSO item)
     {
         uiManager.OpenCustomizationPanel(item);
+    }
+
+    // should open the main cards
+    public void OnEquipItemClick()
+    {
+        uiManager.OpenMainCards();
     }
 }

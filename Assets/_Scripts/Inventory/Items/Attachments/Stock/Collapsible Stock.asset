@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponAttachmentDataSO
   attachmentType: 4
   attachmentName: Collapsible Stock
-  attachmentIcon: {fileID: 0}
+  attachmentIcon: {fileID: -1240560240, guid: 65b8b72294f73b148b7da5693ae5c194, type: 3}
   compatibleWeapons: 00000000

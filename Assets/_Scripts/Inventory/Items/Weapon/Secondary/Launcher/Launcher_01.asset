@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c0de05824a24414bbf53e51f0223c1c, type: 3}
+  m_Name: Launcher_01
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponDataSO
+  itemName: RPG Rocket Launcher
+  itemSprite: {fileID: 1223520605, guid: 75aea941f313f4c40be3d3fa73addd86, type: 3}
+  itemType: 1
+  weaponClass: 5

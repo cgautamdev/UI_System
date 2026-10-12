@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponAttachmentDataSO
   attachmentType: 4
   attachmentName: Folding Stock
-  attachmentIcon: {fileID: 0}
+  attachmentIcon: {fileID: 761381513, guid: 65b8b72294f73b148b7da5693ae5c194, type: 3}
   compatibleWeapons: 01000000

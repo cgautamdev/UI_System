@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponDataSO
   itemName: Vector
   itemSprite: {fileID: 1326610993, guid: 48bace28772931049bd62c2f577cb13c, type: 3}
-  itemCategory: 0
-  WeaponClass: 1
+  itemType: 0
+  weaponClass: 1

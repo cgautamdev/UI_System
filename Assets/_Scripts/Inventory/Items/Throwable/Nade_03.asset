@@ -15,3 +15,4 @@ MonoBehaviour:
   itemName: Smoke Grenade
   itemSprite: {fileID: 871018373, guid: 27a5867750b2da446b9ead2be9a5b410, type: 3}
   itemType: 2
+  throwableType: 1
