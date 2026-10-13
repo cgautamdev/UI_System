@@ -2,8 +2,8 @@ using UnityEngine;
 
 public enum InventoryItemType
 {
-    PrimaryWeapon,
-    SecondaryWeapon,
+    Primary,
+    Secondary,
     Throwable,
     Armor
 }

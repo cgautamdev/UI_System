@@ -53,9 +53,7 @@ public class MainPanelUIManager : MonoBehaviour
     public void UpdateMenuCard(InventoryItemSO item)
     {
         if(item == null) {
-            Debug.LogWarning(
-                "Cannot update main menu card: item is null.",
-                this);
+            Debug.LogWarning("Cannot update main menu card: item is null.",this);
             return;
         }
 
@@ -70,25 +68,19 @@ public class MainPanelUIManager : MonoBehaviour
 
             card.SetMenuCard(item);
 
-            // Refresh attachment icons from runtime state when updating
-            // a weapon card, so stale icons are cleared as well.
             if(item is WeaponDataSO)
                 UpdateMenuCardIcons(item);
 
             return;
         }
 
-        Debug.LogWarning(
-            $"No main menu card found for item type '{item.itemType}'.",
-            this);
+        Debug.LogWarning($"No main menu card found for item type '{item.itemType}'.", this);
     }
 
     public void UpdateMenuCardIcons(InventoryItemSO item)
     {
         if(item == null) {
-            Debug.LogWarning(
-                "Cannot update attachment icons: item is null.",
-                this);
+            Debug.LogWarning("Cannot update attachment icons: item is null.", this);
             return;
         }
 
@@ -103,16 +95,11 @@ public class MainPanelUIManager : MonoBehaviour
         InventoryManager inventory = InventoryManager.Instance;
 
         if(inventory == null) {
-            Debug.LogError(
-                "Cannot update attachment icons: InventoryManager.Instance " +
-                "is missing.",
-                this);
+            Debug.LogError("Cannot update attachment icons: InventoryManager.Instance " + "is missing.", this);
             return;
         }
 
-        // Attachments come exclusively from runtime memory.
-        List<WeaponAttachmentDataSO> attachments =
-            inventory.GetEquippedAttachments(weapon);
+        List<WeaponAttachmentDataSO> attachments = inventory.GetEquippedAttachments(weapon);
 
         foreach(MainCard card in cards) {
             if(card == null || card.CardType != item.itemType)
@@ -122,9 +109,7 @@ public class MainPanelUIManager : MonoBehaviour
             return;
         }
 
-        Debug.LogWarning(
-            $"No main menu card found for weapon type '{item.itemType}'.",
-            this);
+        Debug.LogWarning($"No main menu card found for weapon type '{item.itemType}'.", this);
     }
 
     private bool ValidateUIReferences()
@@ -135,17 +120,13 @@ public class MainPanelUIManager : MonoBehaviour
         }
 
         if(uiManager.InventoryUIManager == null) {
-            Debug.LogError(
-                "InventoryUIManager reference is missing from UIManager.",
-                this);
+            Debug.LogError("InventoryUIManager reference is missing from UIManager.", this);
             return false;
         }
 
         if(uiManager.MainPanel == null ||
             uiManager.InventoryPanel == null) {
-            Debug.LogError(
-                "Main panel or inventory panel reference is missing.",
-                this);
+            Debug.LogError("Main panel or inventory panel reference is missing.", this);
             return false;
         }
 

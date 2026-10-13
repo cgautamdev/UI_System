@@ -35,8 +35,7 @@ public class BuyCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void Initialize(InventoryItemSO item)
     {
         if(item == null) {
-            Debug.LogWarning(
-                "Cannot initialize BuyCard with a null item.", this);
+            Debug.LogWarning("Cannot initialize BuyCard with a null item.", this);
             return;
         }
 
@@ -85,8 +84,7 @@ public class BuyCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
 
         if(inventory.EquippedItems == null) {
-            Debug.LogWarning(
-                "Equipped items list is not initialized.", this);
+            Debug.LogWarning("Equipped items list is not initialized.", this);
             return;
         }
 
@@ -96,8 +94,7 @@ public class BuyCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         RefreshEquipButtonText();
 
-        InventoryUIManager manager =
-            GetComponentInParent<InventoryUIManager>();
+        InventoryUIManager manager = GetComponentInParent<InventoryUIManager>();
 
         if(manager != null) {
             manager.RefreshEquipButtonStates();
@@ -117,14 +114,11 @@ public class BuyCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         bool isEquipped = inventory.EquippedItems.Contains(itemData);
 
-        TextMeshProUGUI buttonText =
-            equipButton.GetComponentInChildren<TextMeshProUGUI>(true);
+        TextMeshProUGUI buttonText = equipButton.GetComponentInChildren<TextMeshProUGUI>(true);
 
         if(buttonText != null)
             buttonText.text = isEquipped ? "Equipped" : "Equip";
 
-        // Keep the button enabled; equipping an already-equipped item
-        // simply refreshes the state and returns to the main panel.
         equipButton.interactable = true;
     }
 
@@ -133,16 +127,13 @@ public class BuyCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if(itemData == null)
             return;
 
-        InventoryUIManager manager =
-            GetComponentInParent<InventoryUIManager>();
+        InventoryUIManager manager = GetComponentInParent<InventoryUIManager>();
 
         if(manager != null) {
             manager.OnCustomizeWeaponClick(itemData);
         }
         else {
-            Debug.LogWarning(
-                "InventoryUIManager could not be found in the parent hierarchy.",
-                this);
+            Debug.LogWarning("InventoryUIManager could not be found in the parent hierarchy.", this);
         }
     }
 

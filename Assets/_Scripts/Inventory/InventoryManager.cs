@@ -8,44 +8,33 @@ public class InventoryManager : MonoBehaviour
     [Header("Inventory Data")]
     [SerializeField] private InventoryItemSO[] inventory;
     [SerializeField]
-    private List<InventoryItemSO> equippedItems =
-        new List<InventoryItemSO>();
+    private List<InventoryItemSO> equippedItems = new();
 
     [Header("Available Attachments")]
     [SerializeField]
-    private List<WeaponAttachmentDataSO> availableAttachments =
-        new List<WeaponAttachmentDataSO>();
+    private List<WeaponAttachmentDataSO> availableAttachments = new();
 
     [Header("Legacy Attachment Lists")]
     [SerializeField]
-    private List<WeaponAttachmentDataSO> primaryWeaponAttachments =
-        new List<WeaponAttachmentDataSO>();
+    private List<WeaponAttachmentDataSO> primaryWeaponAttachments = new();
 
     [SerializeField]
-    private List<WeaponAttachmentDataSO> secondaryWeaponAttachments =
-        new List<WeaponAttachmentDataSO>();
+    private List<WeaponAttachmentDataSO> secondaryWeaponAttachments = new();
 
     [Header("Categorized Inventory")]
     [SerializeField]
-    private List<InventoryItemSO> primaryInventoryWeapons =
-        new List<InventoryItemSO>();
+    private List<InventoryItemSO> primaryInventoryWeapons = new();
 
     [SerializeField]
-    private List<InventoryItemSO> secondaryInventoryWeapons =
-        new List<InventoryItemSO>();
+    private List<InventoryItemSO> secondaryInventoryWeapons = new();
 
     [SerializeField]
-    private List<InventoryItemSO> throwableInventoryItems =
-        new List<InventoryItemSO>();
+    private List<InventoryItemSO> throwableInventoryItems = new();
 
     [SerializeField]
-    private List<InventoryItemSO> armorInventoryItems =
-        new List<InventoryItemSO>();
+    private List<InventoryItemSO> armorInventoryItems = new();
 
-    // Runtime-only attachment state. Never written to disk.
-    private readonly Dictionary<WeaponDataSO, List<WeaponAttachmentDataSO>>
-        runtimeWeaponAttachments =
-            new Dictionary<WeaponDataSO, List<WeaponAttachmentDataSO>>();
+    private readonly Dictionary<WeaponDataSO, List<WeaponAttachmentDataSO>> runtimeWeaponAttachments = new();
 
     public InventoryItemSO[] Inventory => inventory;
     public List<InventoryItemSO> EquippedItems => equippedItems;
@@ -64,7 +53,6 @@ public class InventoryManager : MonoBehaviour
 
         Instance = this;
 
-        // Every new session starts with no runtime attachment changes.
         runtimeWeaponAttachments.Clear();
 
         CategorizeInventoryItem();
@@ -82,8 +70,7 @@ public class InventoryManager : MonoBehaviour
         if(weapon == null)
             return new List<WeaponAttachmentDataSO>();
 
-        if(!runtimeWeaponAttachments.TryGetValue(
-                weapon, out List<WeaponAttachmentDataSO> attachments)) {
+        if(!runtimeWeaponAttachments.TryGetValue(weapon, out List<WeaponAttachmentDataSO> attachments)) {
             attachments = new List<WeaponAttachmentDataSO>();
             runtimeWeaponAttachments.Add(weapon, attachments);
         }
@@ -98,8 +85,7 @@ public class InventoryManager : MonoBehaviour
         if(weapon == null)
             return;
 
-        List<WeaponAttachmentDataSO> runtimeAttachments =
-            GetEquippedAttachments(weapon);
+        List<WeaponAttachmentDataSO> runtimeAttachments = GetEquippedAttachments(weapon);
 
         runtimeAttachments.Clear();
 
@@ -120,9 +106,7 @@ public class InventoryManager : MonoBehaviour
         armorInventoryItems.Clear();
 
         if(inventory == null) {
-            Debug.LogWarning(
-                "InventoryManager: Inventory array is not assigned.",
-                this);
+            Debug.LogWarning("InventoryManager: Inventory array is not assigned.", this);
             return;
         }
 
@@ -131,11 +115,11 @@ public class InventoryManager : MonoBehaviour
                 continue;
 
             switch(item.itemType) {
-                case InventoryItemType.PrimaryWeapon:
+                case InventoryItemType.Primary:
                     primaryInventoryWeapons.Add(item);
                     break;
 
-                case InventoryItemType.SecondaryWeapon:
+                case InventoryItemType.Secondary:
                     secondaryInventoryWeapons.Add(item);
                     break;
 
@@ -148,9 +132,7 @@ public class InventoryManager : MonoBehaviour
                     break;
 
                 default:
-                    Debug.LogWarning(
-                        $"Unsupported inventory item type: {item.itemType}.",
-                        item);
+                    Debug.LogWarning($"Unsupported inventory item type: {item.itemType}.", item);
                     break;
             }
         }
@@ -184,20 +166,17 @@ public class InventoryManager : MonoBehaviour
             MainPanelUIManager.Instance.UpdateMenuCardIcons(item);
         }
 
-        FindFirstObjectByType<InventoryUIManager>()
-            ?.RefreshEquipButtonStates();
+        FindFirstObjectByType<InventoryUIManager>() ?.RefreshEquipButtonStates();
     }
 
     public void ClearEquippedAttachments(InventoryItemType weaponType)
     {
-        // Legacy lists are retained for compatibility, but are not
-        // the source of attachment data in the runtime system.
         switch(weaponType) {
-            case InventoryItemType.PrimaryWeapon:
+            case InventoryItemType.Primary:
                 primaryWeaponAttachments.Clear();
                 break;
 
-            case InventoryItemType.SecondaryWeapon:
+            case InventoryItemType.Secondary:
                 secondaryWeaponAttachments.Clear();
                 break;
         }

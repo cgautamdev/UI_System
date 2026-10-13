@@ -14,12 +14,10 @@ public class CustomizationPanelUIManager : MonoBehaviour
 
     [Header("Attachment Inventory")]
     [SerializeField]
-    private List<WeaponAttachmentDataSO> attachmentInventory =
-        new List<WeaponAttachmentDataSO>();
+    private List<WeaponAttachmentDataSO> attachmentInventory = new();
 
     [SerializeField]
-    private List<WeaponAttachmentDataSO> tempAttachments =
-        new List<WeaponAttachmentDataSO>();
+    private List<WeaponAttachmentDataSO> tempAttachments = new();
 
     [Header("Attachment Cards")]
     [SerializeField] private AttachmentBuyCard attachmentBuyCard;
@@ -40,28 +38,22 @@ public class CustomizationPanelUIManager : MonoBehaviour
             return;
         }
 
-        attachmentInventory =
-            InventoryManager.Instance.AvailableAttachments;
+        attachmentInventory = InventoryManager.Instance.AvailableAttachments;
     }
 
     private void ValidateReferences()
     {
         if(weaponPreviewContainer == null)
-            Debug.LogError(
-                "Weapon Preview Container is not assigned.", this);
+            Debug.LogError("Weapon Preview Container is not assigned.", this);
 
         if(weaponCustomizationPreviewContainer == null)
-            Debug.LogError(
-                "Weapon Customization Preview Prefab is not assigned.",
-                this);
+            Debug.LogError("Weapon Customization Preview Prefab is not assigned.", this);
 
         if(attachmentBuyCardSpawn == null)
-            Debug.LogError(
-                "Attachment Buy Card Spawn is not assigned.", this);
+            Debug.LogError("Attachment Buy Card Spawn is not assigned.", this);
 
         if(attachmentBuyCard == null)
-            Debug.LogError(
-                "Attachment Buy Card Prefab is not assigned.", this);
+            Debug.LogError("Attachment Buy Card Prefab is not assigned.", this);
     }
 
     #region Weapon Customization
@@ -69,22 +61,18 @@ public class CustomizationPanelUIManager : MonoBehaviour
     public void OnCustomizeWeapon(InventoryItemSO weapon)
     {
         if(weapon is not WeaponDataSO weaponData) {
-            Debug.LogWarning(
-                "Cannot customize this item because it is not a weapon.",
-                this);
+            Debug.LogWarning("Cannot customize this item because it is not a weapon.",this);
             return;
         }
 
         if(weaponPreviewContainer == null ||
             weaponCustomizationPreviewContainer == null) {
-            Debug.LogError(
-                "Weapon preview references are not configured.", this);
+            Debug.LogError("Weapon preview references are not configured.", this);
             return;
         }
 
         if(InventoryManager.Instance == null) {
-            Debug.LogError(
-                "InventoryManager.Instance is missing.", this);
+            Debug.LogError("InventoryManager.Instance is missing.", this);
             return;
         }
 
@@ -93,24 +81,17 @@ public class CustomizationPanelUIManager : MonoBehaviour
         // Load the current session's attachments into the draft list.
         tempAttachments.Clear();
 
-        tempAttachments.AddRange(
-            InventoryManager.Instance.GetEquippedAttachments(weaponData));
+        tempAttachments.AddRange(InventoryManager.Instance.GetEquippedAttachments(weaponData));
 
         ClearWeaponPreview();
         ClearAttachmentBuyCards();
 
-        GameObject customizationCard = Instantiate(
-            weaponCustomizationPreviewContainer,
-            weaponPreviewContainer);
+        GameObject customizationCard = Instantiate(weaponCustomizationPreviewContainer, weaponPreviewContainer);
 
-        WeaponCustomizationCard cardScript =
-            customizationCard.GetComponent<WeaponCustomizationCard>();
+        WeaponCustomizationCard cardScript = customizationCard.GetComponent<WeaponCustomizationCard>();
 
         if(cardScript == null) {
-            Debug.LogError(
-                "Weapon customization preview prefab is missing " +
-                "WeaponCustomizationCard.",
-                customizationCard);
+            Debug.LogError("Weapon customization preview prefab is missing " + "WeaponCustomizationCard.", customizationCard);
 
             Destroy(customizationCard);
             return;
@@ -170,27 +151,21 @@ public class CustomizationPanelUIManager : MonoBehaviour
 
         if(attachmentBuyCard == null ||
             attachmentBuyCardSpawn == null) {
-            Debug.LogError(
-                "Attachment buy card prefab or spawn container is missing.",
-                this);
+            Debug.LogError("Attachment buy card prefab or spawn container is missing.", this);
             return;
         }
 
-        List<WeaponAttachmentDataSO> attachments =
-            FindPossibleAttachments(attachmentType);
+        List<WeaponAttachmentDataSO> attachments = FindPossibleAttachments(attachmentType);
 
         foreach(WeaponAttachmentDataSO attachment in attachments) {
             if(attachment == null)
                 continue;
 
-            AttachmentBuyCard card = Instantiate(
-                attachmentBuyCard,
-                attachmentBuyCardSpawn);
+            AttachmentBuyCard card = Instantiate(attachmentBuyCard, attachmentBuyCardSpawn);
 
             card.SetAttachmentBuyCard(attachment);
 
-            card.UpdateEquipText(
-                tempAttachments.Contains(attachment));
+            card.UpdateEquipText(tempAttachments.Contains(attachment));
         }
     }
 
@@ -210,8 +185,7 @@ public class CustomizationPanelUIManager : MonoBehaviour
     public List<WeaponAttachmentDataSO> FindPossibleAttachments(
         AttachmentType attachmentType)
     {
-        List<WeaponAttachmentDataSO> possibleAttachments =
-            new List<WeaponAttachmentDataSO>();
+        List<WeaponAttachmentDataSO> possibleAttachments = new();
 
         if(selectedWeapon is not WeaponDataSO weapon)
             return possibleAttachments;
@@ -236,31 +210,23 @@ public class CustomizationPanelUIManager : MonoBehaviour
 
     public bool CanEquipAttachment(WeaponAttachmentDataSO attachment)
     {
-        return selectedWeapon is WeaponDataSO &&
-               attachment != null;
+        return selectedWeapon is WeaponDataSO && attachment != null;
     }
 
-    public void OnAttachmentEquipOnWeapon(
-        WeaponAttachmentDataSO attachment)
+    public void OnAttachmentEquipOnWeapon(WeaponAttachmentDataSO attachment)
     {
         if(selectedWeapon is not WeaponDataSO ||
             attachment == null) {
             return;
         }
 
-        // Clicking an equipped attachment removes it.
         bool isEquipped = tempAttachments.Contains(attachment);
 
         if(isEquipped) {
             tempAttachments.Remove(attachment);
         }
         else {
-            // Only one attachment of each type may be selected.
-            tempAttachments.RemoveAll(
-                existing =>
-                    existing != null &&
-                    existing.attachmentType == attachment.attachmentType);
-
+            tempAttachments.RemoveAll(existing => existing != null && existing.attachmentType == attachment.attachmentType);
             tempAttachments.Add(attachment);
         }
 
@@ -274,18 +240,12 @@ public class CustomizationPanelUIManager : MonoBehaviour
         if(weaponPreviewContainer == null)
             return;
 
-        WeaponCustomizationCard preview =
-            weaponPreviewContainer.GetComponentInChildren<
-                WeaponCustomizationCard>();
+        WeaponCustomizationCard preview = weaponPreviewContainer.GetComponentInChildren<WeaponCustomizationCard>();
 
         if(preview == null || preview.Cards == null)
             return;
 
-        WeaponAttachmentDataSO equippedAttachment =
-            tempAttachments.Find(
-                existing =>
-                    existing != null &&
-                    existing.attachmentType == attachmentType);
+        WeaponAttachmentDataSO equippedAttachment = tempAttachments.Find(existing => existing != null && existing.attachmentType == attachmentType);
 
         foreach(CustomizationAttachmentCard card in preview.Cards) {
             if(card == null || card.Type != attachmentType)
@@ -306,8 +266,7 @@ public class CustomizationPanelUIManager : MonoBehaviour
             return;
 
         foreach(Transform child in attachmentBuyCardSpawn) {
-            AttachmentBuyCard card =
-                child.GetComponent<AttachmentBuyCard>();
+            AttachmentBuyCard card = child.GetComponent<AttachmentBuyCard>();
 
             if(card == null)
                 continue;
@@ -349,9 +308,7 @@ public class CustomizationPanelUIManager : MonoBehaviour
 
         if(uiManager.CustomizationPanel == null ||
             uiManager.InventoryPanel == null) {
-            Debug.LogError(
-                "Customization or inventory panel reference is missing.",
-                this);
+            Debug.LogError("Customization or inventory panel reference is missing.", this);
             return;
         }
 
@@ -367,32 +324,22 @@ public class CustomizationPanelUIManager : MonoBehaviour
     public void OnConfirmWeaponCustomization()
     {
         if(selectedWeapon is not WeaponDataSO weaponData) {
-            Debug.LogWarning(
-                "Cannot confirm customization because no weapon is selected.",
-                this);
+            Debug.LogWarning("Cannot confirm customization because no weapon is selected.", this);
             return;
         }
 
         InventoryManager inventory = InventoryManager.Instance;
 
         if(inventory == null) {
-            Debug.LogError(
-                "Cannot confirm customization: InventoryManager is missing.",
-                this);
+            Debug.LogError("Cannot confirm customization: InventoryManager is missing.", this);
             return;
         }
 
-        // Store attachments in runtime memory only.
-        // Do not modify weaponData.equippedAttachments.
-        inventory.SetEquippedAttachments(
-            weaponData,
-            tempAttachments);
+        inventory.SetEquippedAttachments(weaponData, tempAttachments);
 
-        if(inventory.EquippedItems != null &&
-            inventory.EquippedItems.Contains(selectedWeapon)) {
+        if(inventory.EquippedItems != null && inventory.EquippedItems.Contains(selectedWeapon)) {
             if(MainPanelUIManager.Instance != null) {
-                MainPanelUIManager.Instance.UpdateMenuCardIcons(
-                    selectedWeapon);
+                MainPanelUIManager.Instance.UpdateMenuCardIcons(selectedWeapon);
             }
         }
         else {

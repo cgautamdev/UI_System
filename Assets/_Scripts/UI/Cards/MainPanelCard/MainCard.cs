@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MainCard : MonoBehaviour
+public class MainCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Card Configuration")]
     [SerializeField] private InventoryItemType cardType;
@@ -19,20 +21,38 @@ public class MainCard : MonoBehaviour
     [SerializeField] private Sprite transparentIcon;
 
     [Header("Attachment Icons")]
+    [SerializeField] private Transform attachmentContainer;
     [SerializeField] private Image muzzleAttachmentIcon;
     [SerializeField] private Image barrelAttachmentIcon;
     [SerializeField] private Image opticAttachmentIcon;
     [SerializeField] private Image stockAttachmentIcon;
     [SerializeField] private Image magAttachmentIcon;
 
+    [Header("Unity Events")]
+    [SerializeField] private UnityEvent PointerEnter;
+    [SerializeField] private UnityEvent PointerExit;
+
     public InventoryItemType CardType => cardType;
+    private InventoryItemSO itemData;
+
+    private bool isHovered;
+    private bool hasAttachments;
+
+    private void Awake()
+    {
+        hasAttachments = false;
+
+        if(attachmentContainer != null)
+            attachmentContainer.gameObject.SetActive(false);
+    }
 
     public void OpenInventoryCategory()
     {
         if(mainPanelUIManager == null) {
             Debug.LogError(
-                "Cannot open inventory category: MainPanelUIManager is missing.",
-                this);
+                "MainPanelUIManager is missing.",
+                this
+            );
             return;
         }
 
@@ -41,12 +61,8 @@ public class MainCard : MonoBehaviour
 
     public void SetMenuCard(InventoryItemSO item)
     {
-        if(item == null) {
-            Debug.LogWarning(
-                "Cannot set main card: inventory item is null.",
-                this);
+        if(item == null)
             return;
-        }
 
         if(emptyItem != null)
             emptyItem.SetActive(false);
@@ -59,30 +75,37 @@ public class MainCard : MonoBehaviour
 
         if(cardCategoryText != null)
             cardCategoryText.text = item.itemType.ToString();
+
+        itemData = item;
     }
 
     public void UpdateAttachmentIcons(
-        List<WeaponAttachmentDataSO> attachments)
+        List<WeaponAttachmentDataSO> attachments
+    )
     {
         ResetAttachmentIcons();
 
-        if(attachments == null)
-            return;
+        if(attachments != null) {
+            foreach(WeaponAttachmentDataSO attachment in attachments) {
+                if(attachment == null)
+                    continue;
 
-        foreach(WeaponAttachmentDataSO attachment in attachments) {
-            if(attachment == null)
-                continue;
+                Image targetIcon = GetAttachmentIcon(
+                    attachment.attachmentType
+                );
 
-            Image targetIcon = GetAttachmentIcon(
-                attachment.attachmentType);
+                if(targetIcon == null)
+                    continue;
 
-            if(targetIcon == null)
-                continue;
+                hasAttachments = true;
 
-            targetIcon.sprite = attachment.attachmentIcon != null
-                ? attachment.attachmentIcon
-                : transparentIcon;
+                targetIcon.sprite = attachment.attachmentIcon != null
+                    ? attachment.attachmentIcon
+                    : transparentIcon;
+            }
         }
+
+        UpdateAttachmentContainerVisibility();
     }
 
     public void ResetAttachmentIcons()
@@ -92,6 +115,45 @@ public class MainCard : MonoBehaviour
         ResetAttachmentIcon(opticAttachmentIcon);
         ResetAttachmentIcon(stockAttachmentIcon);
         ResetAttachmentIcon(magAttachmentIcon);
+
+        hasAttachments = false;
+
+        UpdateAttachmentContainerVisibility();
+    }
+
+    // Call this from a Unity Event to show the attachment container.
+    public void ShowAttachmentContainer()
+    {
+        isHovered = true;
+        UpdateAttachmentContainerVisibility();
+    }
+
+    // Call this from a Unity Event to hide the attachment container.
+    public void HideAttachmentContainer()
+    {
+        isHovered = false;
+        UpdateAttachmentContainerVisibility();
+    }
+
+    public InventoryItemSO ItemData => itemData;
+
+    private bool SupportsAttachments()
+    {
+        return cardType != InventoryItemType.Throwable &&
+               cardType != InventoryItemType.Armor;
+    }
+
+    private void UpdateAttachmentContainerVisibility()
+    {
+        if(attachmentContainer == null)
+            return;
+
+        bool shouldShow =
+            SupportsAttachments() &&
+            isHovered &&
+            hasAttachments;
+
+        attachmentContainer.gameObject.SetActive(shouldShow);
     }
 
     private void ResetAttachmentIcon(Image icon)
@@ -102,24 +164,25 @@ public class MainCard : MonoBehaviour
 
     private Image GetAttachmentIcon(AttachmentType attachmentType)
     {
-        switch(attachmentType) {
-            case AttachmentType.Muzzle:
-                return muzzleAttachmentIcon;
+        return attachmentType switch {
+            AttachmentType.Muzzle => muzzleAttachmentIcon,
+            AttachmentType.Barrel => barrelAttachmentIcon,
+            AttachmentType.Optic => opticAttachmentIcon,
+            AttachmentType.Stock => stockAttachmentIcon,
+            AttachmentType.Magazine => magAttachmentIcon,
+            _ => null
+        };
+    }
 
-            case AttachmentType.Barrel:
-                return barrelAttachmentIcon;
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        ShowAttachmentContainer();
+        PointerEnter?.Invoke();
+    }
 
-            case AttachmentType.Optic:
-                return opticAttachmentIcon;
-
-            case AttachmentType.Stock:
-                return stockAttachmentIcon;
-
-            case AttachmentType.Magazine:
-                return magAttachmentIcon;
-
-            default:
-                return null;
-        }
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        HideAttachmentContainer();
+        PointerExit?.Invoke();
     }
 }

@@ -40,13 +40,10 @@ public class CustomizationAttachmentCard : MonoBehaviour,
 
     public void OnAttachmentCardClick()
     {
-        CustomizationPanelUIManager manager =
-            GetComponentInParent<CustomizationPanelUIManager>();
+        CustomizationPanelUIManager manager = GetComponentInParent<CustomizationPanelUIManager>();
 
         if(manager == null) {
-            Debug.LogWarning(
-                "CustomizationPanelUIManager was not found in the parent hierarchy.",
-                this);
+            Debug.LogWarning("CustomizationPanelUIManager was not found in the parent hierarchy.", this);
             return;
         }
 
@@ -57,16 +54,12 @@ public class CustomizationAttachmentCard : MonoBehaviour,
         WeaponAttachmentDataSO weaponAttachmentDataSO)
     {
         if(weaponAttachmentDataSO == null) {
-            Debug.LogWarning(
-                "Cannot update attachment icon: attachment data is null.",
-                this);
+            Debug.LogWarning("Cannot update attachment icon: attachment data is null.", this);
             return;
         }
 
         if(attachmentIcon == null) {
-            Debug.LogWarning(
-                "Attachment icon Image reference is missing.",
-                this);
+            Debug.LogWarning("Attachment icon Image reference is missing.", this);
             return;
         }
 

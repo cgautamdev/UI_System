@@ -31,41 +31,31 @@ public class UIManager : MonoBehaviour
             return;
 
         if(inventoryPanel == null) {
-            Debug.LogError(
-                "Inventory panel reference is missing.",
-                this);
+            Debug.LogError("Inventory panel reference is missing.", this);
             return;
         }
 
-        inventoryUIManager =
-            inventoryPanel.GetComponent<InventoryUIManager>();
+        inventoryUIManager = inventoryPanel.GetComponent<InventoryUIManager>();
 
         if(inventoryUIManager == null) {
-            Debug.LogError(
-                "Inventory panel is missing InventoryUIManager.",
-                inventoryPanel);
+            Debug.LogError("Inventory panel is missing InventoryUIManager.",inventoryPanel);
         }
     }
 
     public void OpenCustomizationPanel(InventoryItemSO itemData)
     {
         if(itemData == null) {
-            Debug.LogWarning(
-                "Cannot open customization: no item was selected.",
-                this);
+            Debug.LogWarning("Cannot open customization: no item was selected.", this);
             return;
         }
 
         if(!ValidatePanelReferences())
             return;
 
-        CustomizationPanelUIManager customizationManager =
-            customizationPanel.GetComponent<CustomizationPanelUIManager>();
+        CustomizationPanelUIManager customizationManager = customizationPanel.GetComponent<CustomizationPanelUIManager>();
 
         if(customizationManager == null) {
-            Debug.LogError(
-                "Customization panel is missing CustomizationPanelUIManager.",
-                customizationPanel);
+            Debug.LogError("Customization panel is missing CustomizationPanelUIManager.", customizationPanel);
             return;
         }
 
@@ -92,10 +82,7 @@ public class UIManager : MonoBehaviour
         if(mainPanel == null ||
             inventoryPanel == null ||
             customizationPanel == null) {
-            Debug.LogError(
-                "UIManager is missing a panel reference. " +
-                "Assign Main, Inventory, and Customization panels in the Inspector.",
-                this);
+            Debug.LogError("UIManager is missing a panel reference. " + "Assign Main, Inventory, and Customization panels in the Inspector.", this);
             return false;
         }
 

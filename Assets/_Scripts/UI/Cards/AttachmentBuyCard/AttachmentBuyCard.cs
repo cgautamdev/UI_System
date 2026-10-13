@@ -22,9 +22,7 @@ public class AttachmentBuyCard : MonoBehaviour
             GetComponentInParent<CustomizationPanelUIManager>();
 
         if(manager == null || attachment == null) {
-            Debug.LogWarning(
-                "Cannot toggle attachment: manager or attachment is missing.",
-                this);
+            Debug.LogWarning("Cannot toggle attachment: manager or attachment is missing.", this);
             return;
         }
 
@@ -44,9 +42,7 @@ public class AttachmentBuyCard : MonoBehaviour
         WeaponAttachmentDataSO attachmentDataSO)
     {
         if(attachmentDataSO == null) {
-            Debug.LogWarning(
-                "Cannot initialize AttachmentBuyCard: attachment data is missing.",
-                this);
+            Debug.LogWarning("Cannot initialize AttachmentBuyCard: attachment data is missing.", this);
             return;
         }
 

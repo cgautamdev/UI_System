@@ -167,8 +167,8 @@ MonoBehaviour:
   attachmentImage: {fileID: 981294646566542965}
   attachmentName: {fileID: 2527155517472676686}
   attachmentEquipButton: {fileID: 822270226458123255}
-  attachment: {fileID: 0}
   equipText: {fileID: 2243363403975882082}
+  attachment: {fileID: 0}
 --- !u!114 &991390265837435294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,8 +256,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Equip
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 661461f3de23f08409738c8fca155d46, type: 2}
-  m_sharedMaterial: {fileID: -8603488322500385370, guid: 661461f3de23f08409738c8fca155d46, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 98ad0ad546720ee43a65cbf1ebc9ffd8, type: 2}
+  m_sharedMaterial: {fileID: -6275461544279379748, guid: 98ad0ad546720ee43a65cbf1ebc9ffd8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -643,8 +643,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Integrated Suppressor Barrel
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 661461f3de23f08409738c8fca155d46, type: 2}
-  m_sharedMaterial: {fileID: -8603488322500385370, guid: 661461f3de23f08409738c8fca155d46, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 98ad0ad546720ee43a65cbf1ebc9ffd8, type: 2}
+  m_sharedMaterial: {fileID: -6275461544279379748, guid: 98ad0ad546720ee43a65cbf1ebc9ffd8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

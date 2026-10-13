@@ -76,8 +76,7 @@ public class InventoryTabGroup : MonoBehaviour
             if(panel == null)
                 continue;
 
-            InventoryCategoryPanel categoryPanel =
-                panel.GetComponent<InventoryCategoryPanel>();
+            InventoryCategoryPanel categoryPanel = panel.GetComponent<InventoryCategoryPanel>();
 
             if(categoryPanel == null)
                 continue;
@@ -101,9 +100,7 @@ public class InventoryTabGroup : MonoBehaviour
         }
 
         if(targetButton == null) {
-            Debug.LogWarning(
-                $"No inventory tab found for category '{category}'.",
-                this);
+            Debug.LogWarning($"No inventory tab found for category '{category}'.", this);
 
             OpenFullInventoryTabs();
             return;
@@ -157,8 +154,7 @@ public class InventoryTabGroup : MonoBehaviour
             if(button == null || button.BackgroundImage == null)
                 continue;
 
-            button.BackgroundImage.color =
-                button == selectedTab ? tabActiveColor : tabIdleColor;
+            button.BackgroundImage.color = button == selectedTab ? tabActiveColor : tabIdleColor;
         }
     }
 
