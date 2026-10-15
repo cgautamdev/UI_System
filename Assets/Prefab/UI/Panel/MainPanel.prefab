@@ -539,9 +539,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5565352202201015870}
     m_Modifications:
+    - target: {fileID: 716850118451507496, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 716850118451507496, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 668910929076873690}
+    - target: {fileID: 716850118451507496, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 716850118451507496, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MainCard, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 758549076773842586, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_fontSize
-      value: 16.65
+      value: 15.35
       objectReference: {fileID: 0}
     - target: {fileID: 1456802260689954193, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_Name
@@ -740,6 +756,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+--- !u!1 &668910929076873690 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1456802260689954193, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
+  m_PrefabInstance: {fileID: 2125675943541984331}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4069348878620364391 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2668048787714654764, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
@@ -750,7 +771,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8842831849313869161, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
   m_PrefabInstance: {fileID: 2125675943541984331}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 668910929076873690}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76c568b6614217140bda28e0f5a586ef, type: 3}
@@ -766,7 +787,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 758549076773842586, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_fontSize
-      value: 16.65
+      value: 15.35
       objectReference: {fileID: 0}
     - target: {fileID: 1456802260689954193, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_Name
@@ -971,7 +992,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 758549076773842586, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_fontSize
-      value: 16.65
+      value: 15.35
       objectReference: {fileID: 0}
     - target: {fileID: 1456802260689954193, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_Name
@@ -1176,7 +1197,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 758549076773842586, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_fontSize
-      value: 16.65
+      value: 15.35
       objectReference: {fileID: 0}
     - target: {fileID: 1456802260689954193, guid: 8a2ec0fb52448614ab9fbc4034ecdb8c, type: 3}
       propertyPath: m_Name

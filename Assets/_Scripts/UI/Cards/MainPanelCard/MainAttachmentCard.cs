@@ -30,11 +30,13 @@ public class MainAttachmentCard : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        Debug.Log($"ENTER: {name}");
         PointerEnter?.Invoke();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        Debug.Log($"EXIT: {name}");
         PointerExit?.Invoke();
     }
 }

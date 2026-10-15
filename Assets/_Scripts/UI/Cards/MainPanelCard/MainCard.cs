@@ -1,15 +1,16 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MainCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class MainCard : MonoBehaviour
 {
+    private static readonly int CloseHash = Animator.StringToHash("Close");
+    private static readonly int OpenHash = Animator.StringToHash("Open");
     [Header("Card Configuration")]
     [SerializeField] private InventoryItemType cardType;
     [SerializeField] private MainPanelUIManager mainPanelUIManager;
+    [SerializeField] private UIManager uiManager;
 
     [Header("Item Display")]
     [SerializeField] private TextMeshProUGUI itemName;
@@ -17,42 +18,27 @@ public class MainCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] private Image itemImage;
     [SerializeField] private GameObject emptyItem;
 
-    [Header("Attachment Icon Settings")]
-    [SerializeField] private Sprite transparentIcon;
-
     [Header("Attachment Icons")]
-    [SerializeField] private Transform attachmentContainer;
     [SerializeField] private Image muzzleAttachmentIcon;
     [SerializeField] private Image barrelAttachmentIcon;
     [SerializeField] private Image opticAttachmentIcon;
     [SerializeField] private Image stockAttachmentIcon;
     [SerializeField] private Image magAttachmentIcon;
 
-    [Header("Unity Events")]
-    [SerializeField] private UnityEvent PointerEnter;
-    [SerializeField] private UnityEvent PointerExit;
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
+
+    private bool isAttachmentCardOpen = false;
 
     public InventoryItemType CardType => cardType;
+    public InventoryItemSO ItemData => itemData;
+
     private InventoryItemSO itemData;
-
-    private bool isHovered;
-    private bool hasAttachments;
-
-    private void Awake()
-    {
-        hasAttachments = false;
-
-        if(attachmentContainer != null)
-            attachmentContainer.gameObject.SetActive(false);
-    }
 
     public void OpenInventoryCategory()
     {
         if(mainPanelUIManager == null) {
-            Debug.LogError(
-                "MainPanelUIManager is missing.",
-                this
-            );
+            Debug.LogError("MainPanelUIManager is missing.", this);
             return;
         }
 
@@ -63,6 +49,8 @@ public class MainCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if(item == null)
             return;
+
+        itemData = item;
 
         if(emptyItem != null)
             emptyItem.SetActive(false);
@@ -75,37 +63,27 @@ public class MainCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         if(cardCategoryText != null)
             cardCategoryText.text = item.itemType.ToString();
-
-        itemData = item;
     }
 
-    public void UpdateAttachmentIcons(
-        List<WeaponAttachmentDataSO> attachments
-    )
+    public void UpdateAttachmentIcons(List<WeaponAttachmentDataSO> attachments)
     {
         ResetAttachmentIcons();
 
-        if(attachments != null) {
-            foreach(WeaponAttachmentDataSO attachment in attachments) {
-                if(attachment == null)
-                    continue;
+        if(attachments == null)
+            return;
 
-                Image targetIcon = GetAttachmentIcon(
-                    attachment.attachmentType
-                );
+        foreach(WeaponAttachmentDataSO attachment in attachments) {
+            if(attachment == null)
+                continue;
 
-                if(targetIcon == null)
-                    continue;
+            Image targetIcon = GetAttachmentIcon(attachment.attachmentType);
 
-                hasAttachments = true;
+            if(targetIcon == null)
+                continue;
 
-                targetIcon.sprite = attachment.attachmentIcon != null
-                    ? attachment.attachmentIcon
-                    : transparentIcon;
-            }
+            targetIcon.sprite = attachment.attachmentIcon;
+            targetIcon.enabled = attachment.attachmentIcon != null;
         }
-
-        UpdateAttachmentContainerVisibility();
     }
 
     public void ResetAttachmentIcons()
@@ -115,51 +93,30 @@ public class MainCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         ResetAttachmentIcon(opticAttachmentIcon);
         ResetAttachmentIcon(stockAttachmentIcon);
         ResetAttachmentIcon(magAttachmentIcon);
-
-        hasAttachments = false;
-
-        UpdateAttachmentContainerVisibility();
     }
 
-    // Call this from a Unity Event to show the attachment container.
-    public void ShowAttachmentContainer()
+    // Connect this function to your Button's OnClick event.
+    public void OnCustomizeAttachmentsButtonClick()
     {
-        isHovered = true;
-        UpdateAttachmentContainerVisibility();
-    }
-
-    // Call this from a Unity Event to hide the attachment container.
-    public void HideAttachmentContainer()
-    {
-        isHovered = false;
-        UpdateAttachmentContainerVisibility();
-    }
-
-    public InventoryItemSO ItemData => itemData;
-
-    private bool SupportsAttachments()
-    {
-        return cardType != InventoryItemType.Throwable &&
-               cardType != InventoryItemType.Armor;
-    }
-
-    private void UpdateAttachmentContainerVisibility()
-    {
-        if(attachmentContainer == null)
-            return;
-
-        bool shouldShow =
-            SupportsAttachments() &&
-            isHovered &&
-            hasAttachments;
-
-        attachmentContainer.gameObject.SetActive(shouldShow);
+        if(isAttachmentCardOpen) {
+            animator.SetTrigger(CloseHash);
+            Debug.Log("Close");
+        }
+        else {
+            animator.SetTrigger(OpenHash);
+            Debug.Log("Open");
+        }
+        isAttachmentCardOpen = !isAttachmentCardOpen;
+        Debug.Log(isAttachmentCardOpen);
     }
 
     private void ResetAttachmentIcon(Image icon)
     {
-        if(icon != null)
-            icon.sprite = transparentIcon;
+        if(icon == null)
+            return;
+
+        icon.sprite = null;
+        icon.enabled = false;
     }
 
     private Image GetAttachmentIcon(AttachmentType attachmentType)
@@ -172,17 +129,5 @@ public class MainCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             AttachmentType.Magazine => magAttachmentIcon,
             _ => null
         };
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        ShowAttachmentContainer();
-        PointerEnter?.Invoke();
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        HideAttachmentContainer();
-        PointerExit?.Invoke();
     }
 }
