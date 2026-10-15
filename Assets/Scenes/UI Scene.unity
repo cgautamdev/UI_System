@@ -333,6 +333,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a650de70657bc4a990a18a8307b02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomizationPanelUIManager
+--- !u!114 &194254565 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6874219951554769588, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+  m_PrefabInstance: {fileID: 1789179420}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c568b6614217140bda28e0f5a586ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainCard
+--- !u!114 &232235989 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4989735840767368965, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+  m_PrefabInstance: {fileID: 1789179420}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c568b6614217140bda28e0f5a586ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainCard
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1394,6 +1416,22 @@ MonoBehaviour:
   inventoryPanel: {fileID: 841470120}
   customizationPanel: {fileID: 186552186}
   inventoryUIManager: {fileID: 980721882}
+  mainCards:
+  - {fileID: 2012782535}
+  - {fileID: 194254565}
+  - {fileID: 232235989}
+  - {fileID: 1385925066}
+--- !u!114 &1385925066 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6517807910413762010, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+  m_PrefabInstance: {fileID: 1789179420}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c568b6614217140bda28e0f5a586ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainCard
 --- !u!1 &1660958040
 GameObject:
   m_ObjectHideFlags: 0
@@ -1770,23 +1808,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1480884246751378787, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1480884246751378787, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1789179422}
+      objectReference: {fileID: 2012782535}
     - target: {fileID: 1480884246751378787, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1480884246751378787, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetTrigger
+      value: OnCustomizeAttachmentsButtonClick
       objectReference: {fileID: 0}
     - target: {fileID: 1480884246751378787, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.Animator, UnityEngine
+      value: MainCard, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1480884246751378787, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -2076,6 +2114,14 @@ PrefabInstance:
       propertyPath: customizationPanelManager
       value: 
       objectReference: {fileID: 186552187}
+    - target: {fileID: 3183179941847080693, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 194254565}
+    - target: {fileID: 3183179941847080693, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnCustomizeAttachmentsButtonClick
+      objectReference: {fileID: 0}
     - target: {fileID: 3191046518844389759, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
       propertyPath: uiManager
       value: 
@@ -2616,6 +2662,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4989735840767368965, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989735840767368965, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 1276731290}
+    - target: {fileID: 4989735840767368965, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+      propertyPath: magAttachmentIcon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989735840767368965, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+      propertyPath: opticAttachmentIcon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989735840767368965, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+      propertyPath: stockAttachmentIcon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989735840767368965, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+      propertyPath: barrelAttachmentIcon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989735840767368965, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+      propertyPath: muzzleAttachmentIcon
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5085587395089397612, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
       propertyPath: m_Name
       value: AttachmentIconCardsMuzzle
@@ -2740,6 +2814,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6517807910413762010, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6517807910413762010, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 1276731290}
+    - target: {fileID: 6517807910413762010, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+      propertyPath: magAttachmentIcon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6517807910413762010, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+      propertyPath: opticAttachmentIcon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6517807910413762010, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+      propertyPath: stockAttachmentIcon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6517807910413762010, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+      propertyPath: barrelAttachmentIcon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6517807910413762010, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+      propertyPath: muzzleAttachmentIcon
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6631874264329324225, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2772,6 +2874,10 @@ PrefabInstance:
       propertyPath: customizationPanelManager
       value: 
       objectReference: {fileID: 186552187}
+    - target: {fileID: 6874219951554769588, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 1276731290}
     - target: {fileID: 6959391357020766937, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2888,6 +2994,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7478200471127380258, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 1276731290}
     - target: {fileID: 7543503428406900636, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
       propertyPath: uiManager
       value: 
@@ -3092,16 +3202,22 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3333104224358307676, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
   m_PrefabInstance: {fileID: 1789179420}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1789179422 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8923388016736007045, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
-  m_PrefabInstance: {fileID: 1789179420}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1789179424 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3527793325536676438, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
   m_PrefabInstance: {fileID: 1789179420}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2012782535 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7478200471127380258, guid: 1a78e1cd9645d384cb0c12fe731975a6, type: 3}
+  m_PrefabInstance: {fileID: 1789179420}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c568b6614217140bda28e0f5a586ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainCard
 --- !u!1 &2091951122
 GameObject:
   m_ObjectHideFlags: 0

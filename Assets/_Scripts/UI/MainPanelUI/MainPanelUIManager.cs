@@ -46,8 +46,7 @@ public class MainPanelUIManager : MonoBehaviour
 
         tabGroup.OnTabSelectedFromCard(cardType);
 
-        uiManager.MainPanel.SetActive(false);
-        uiManager.InventoryPanel.SetActive(true);
+        ResetAllCardAnimations();
     }
 
     public void UpdateMenuCard(InventoryItemSO item)
@@ -76,6 +75,19 @@ public class MainPanelUIManager : MonoBehaviour
 
         Debug.LogWarning($"No main menu card found for item type '{item.itemType}'.", this);
     }
+
+
+    private void ResetAllCardAnimations()
+    {
+        foreach(MainCard card in cards) {
+            if(card != null)
+                card.ResetAttachmentCardAnimation();
+        }
+
+        uiManager.MainPanel.SetActive(false);
+        uiManager.InventoryPanel.SetActive(true);
+    }
+
 
     public void UpdateMenuCardIcons(InventoryItemSO item)
     {

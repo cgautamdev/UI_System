@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MainCard : MonoBehaviour
+public class MainCard : MonoBehaviour, IPointerExitHandler
 {
+    private static readonly int ClosedHash = Animator.StringToHash("Closed");
     private static readonly int CloseHash = Animator.StringToHash("Close");
     private static readonly int OpenHash = Animator.StringToHash("Open");
     [Header("Card Configuration")]
@@ -41,6 +43,8 @@ public class MainCard : MonoBehaviour
             Debug.LogError("MainPanelUIManager is missing.", this);
             return;
         }
+
+        ResetAttachmentCardAnimation();
 
         mainPanelUIManager.OpenInventoryWithCategory(cardType);
     }
@@ -96,19 +100,49 @@ public class MainCard : MonoBehaviour
     }
 
     // Connect this function to your Button's OnClick event.
+
     public void OnCustomizeAttachmentsButtonClick()
     {
-        if(isAttachmentCardOpen) {
+        if(animator == null) {
+            Debug.LogError("Attachments Animator is not assigned.", this);
+            return;
+        }
+
+        // Read the Animator's actual state instead of trusting a separate bool.
+        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+
+        bool isOpen =
+            state.IsName("Opened") ||
+            (state.IsName("Open") && state.normalizedTime >= 0.9f);
+
+        // Clear both triggers so they cannot conflict.
+        animator.ResetTrigger(OpenHash);
+        animator.ResetTrigger(CloseHash);
+
+        if(isOpen)
             animator.SetTrigger(CloseHash);
-            Debug.Log("Close");
-        }
-        else {
+        else if(state.IsName("Closed"))
             animator.SetTrigger(OpenHash);
-            Debug.Log("Open");
-        }
-        isAttachmentCardOpen = !isAttachmentCardOpen;
-        Debug.Log(isAttachmentCardOpen);
+        else
+            Debug.Log("Animation is transitioning. Try again when it finishes.", this);
     }
+
+    public void ResetAttachmentCardAnimation()
+    {
+        if(animator == null)
+            return;
+
+        animator.ResetTrigger(OpenHash);
+        animator.ResetTrigger(CloseHash);
+
+        isAttachmentCardOpen = false;
+
+        if(animator.isActiveAndEnabled) {
+            animator.Play("Closed", 0, 0f);
+            animator.Update(0f);
+        }
+    }
+
 
     private void ResetAttachmentIcon(Image icon)
     {
@@ -129,5 +163,14 @@ public class MainCard : MonoBehaviour
             AttachmentType.Magazine => magAttachmentIcon,
             _ => null
         };
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if(animator == null)
+            return;
+
+        animator.ResetTrigger(OpenHash);
+        animator.ResetTrigger(CloseHash);
     }
 }

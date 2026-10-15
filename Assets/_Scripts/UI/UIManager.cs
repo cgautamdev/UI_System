@@ -10,6 +10,9 @@ public class UIManager : MonoBehaviour
     [Header("Inventory")]
     [SerializeField] private InventoryUIManager inventoryUIManager;
 
+    [Header("Main Cards")]
+    [SerializeField] private MainCard[] mainCards;
+
     public GameObject MainPanel => mainPanel;
     public GameObject InventoryPanel => inventoryPanel;
     public GameObject CustomizationPanel => customizationPanel;
@@ -42,24 +45,31 @@ public class UIManager : MonoBehaviour
         }
     }
 
+
     public void OpenCustomizationPanel(InventoryItemSO itemData)
     {
         if(itemData == null) {
-            Debug.LogWarning("Cannot open customization: no item was selected.", this);
+            Debug.LogWarning(
+                "Cannot open customization: no item was selected.", this);
             return;
         }
 
         if(!ValidatePanelReferences())
             return;
 
-        CustomizationPanelUIManager customizationManager = customizationPanel.GetComponent<CustomizationPanelUIManager>();
+        CustomizationPanelUIManager customizationManager =
+            customizationPanel.GetComponent<CustomizationPanelUIManager>();
 
         if(customizationManager == null) {
-            Debug.LogError("Customization panel is missing CustomizationPanelUIManager.", customizationPanel);
+            Debug.LogError(
+                "Customization panel is missing CustomizationPanelUIManager.",
+                customizationPanel);
             return;
         }
 
-        // Prepare the selected weapon before displaying the panel.
+        // Clear attachment animation state before leaving the Main Panel.
+        ResetMainCardAnimations();
+
         customizationManager.OnCustomizeWeapon(itemData);
 
         mainPanel.SetActive(false);
@@ -71,6 +81,8 @@ public class UIManager : MonoBehaviour
     {
         if(!ValidatePanelReferences())
             return;
+
+        ResetMainCardAnimations();
 
         mainPanel.SetActive(true);
         inventoryPanel.SetActive(false);
@@ -88,4 +100,17 @@ public class UIManager : MonoBehaviour
 
         return true;
     }
+
+
+    private void ResetMainCardAnimations()
+    {
+        if(mainCards == null)
+            return;
+
+        foreach(MainCard card in mainCards) {
+            if(card != null)
+                card.ResetAttachmentCardAnimation();
+        }
+    }
+
 }
