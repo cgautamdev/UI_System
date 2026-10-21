@@ -46,7 +46,7 @@ public class CustomizationAttachmentCard : MonoBehaviour,
             Debug.LogWarning("CustomizationPanelUIManager was not found in the parent hierarchy.", this);
             return;
         }
-
+        Debug.Log("Click");
         manager.OpenAttachmentBuyPanel(attachmentType);
     }
 

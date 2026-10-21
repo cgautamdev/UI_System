@@ -99,8 +99,26 @@ public class MainCard : MonoBehaviour, IPointerExitHandler
         ResetAttachmentIcon(magAttachmentIcon);
     }
 
-    // Connect this function to your Button's OnClick event.
 
+    public void OnAttachmentButtonClick(AttachmentType attachmentType)
+    {
+        if(uiManager == null) {
+            Debug.LogError("UIManager is missing.", this);
+            return;
+        }
+
+        if(itemData == null) {
+            Debug.LogWarning("No weapon is assigned to this card.", this);
+            return;
+        }
+
+        uiManager.OpenCustomizationAttachmentButtonClick(
+            itemData,
+            attachmentType);
+    }
+
+
+    // Connect this function to your Button's OnClick event.
     public void OnCustomizeAttachmentsButtonClick()
     {
         if(animator == null) {

@@ -1,42 +1,66 @@
+
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class MainAttachmentCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class MainAttachmentCard : MonoBehaviour,
+    IPointerEnterHandler,
+    IPointerExitHandler,
+    IPointerClickHandler
 {
     [Header("Panel References")]
     [SerializeField] private CustomizationPanelUIManager customizationPanelManager;
     [SerializeField] private UIManager uiManager;
 
     [SerializeField] private AttachmentType attachmentType;
+
     [SerializeField] private UnityEvent PointerEnter;
     [SerializeField] private UnityEvent PointerExit;
 
-    // to be called by the main card attachment icons
+    public UnityEvent OnCardClick;
+
     public void OnAttachmentCardClick()
     {
-        // CustomizationPanelUIManager manager = FindFirstObjectByType<CustomizationPanelUIManager>();
-
-        if(customizationPanelManager == null) {
-            Debug.LogWarning("CustomizationPanelUIManager was not found in the parent hierarchy.",this);
+        if(uiManager == null) {
+            Debug.LogWarning("UIManager reference is missing.", this);
             return;
         }
 
-        Debug.Log("Clicked");
+        MainCard mainCard = GetComponentInParent<MainCard>();
 
-        uiManager.OpenCustomizationPanel(GetComponentInParent<MainCard>().ItemData);
-        customizationPanelManager.OpenAttachmentBuyPanel(attachmentType);
+        if(mainCard == null) {
+            Debug.LogWarning("MainCard was not found in the parent hierarchy.", this);
+            return;
+        }
+
+        if(mainCard.ItemData == null) {
+            Debug.LogWarning("No weapon is assigned to this card.", this);
+            return;
+        }
+
+        Debug.Log("Click: " + mainCard.ItemData.name);
+        Debug.Log("Calling OpenCustomizationAttachmentButtonClick...");
+
+        uiManager.OpenCustomizationAttachmentButtonClick(
+            mainCard.ItemData,
+            attachmentType
+        );
+
+        Debug.Log("OpenCustomizationAttachmentButtonClick returned.");
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        OnCardClick?.Invoke();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log($"ENTER: {name}");
         PointerEnter?.Invoke();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log($"EXIT: {name}");
         PointerExit?.Invoke();
     }
 }
